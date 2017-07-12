@@ -255,6 +255,9 @@ func newOpenStack(cfg Config) (*OpenStack, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	provider.HTTPClient = newHTTPLoggerClient()
+
 	if cfg.Global.CAFile != "" {
 		roots, err := certutil.NewPool(cfg.Global.CAFile)
 		if err != nil {
